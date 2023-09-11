@@ -4,8 +4,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from urllib.parse import urlparse, parse_qs
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-
 
 csvfilePath = "downloaded.csv"
 NoattaCsvPath = "Noattachmetns.csv"
@@ -21,7 +19,7 @@ options.add_experimental_option("prefs", prefs)
 
 ## First login page and then the filtered url
 baseUrl = f"https://cenveo.service-now.com/"
-url = f"https://cenveo.service-now.com/incident_list.do?sysparm_query=sys_created_onBETWEENjavascript:gs.dateGenerate(%272022-01-01%27%2C%2700:00:00%27)@javascript:gs.dateGenerate(%272022-12-31%27%2C%2723:59:59%27)%5Ecategory!%3Dpassword%5Eshort_descriptionNOT%20LIKElabels%5Eshort_descriptionNOT%20LIKEPrint&sysparm_first_row=1&sysparm_view="
+url = f"https://cenveo.service-now.com/u_undefined_cenveo_garnishments_list.do?sysparm_userpref_module=1da9aaa0db2faf04b31dd0b2ca96197a"
 
 driver = webdriver.Chrome(options=options)
 
@@ -103,6 +101,8 @@ while "Showing rows 1 to" not in currentNav:
                         By.ID,
                         "sys_readonly." + qdict["sysparm_record_target"][0] + ".number",
                     )
+
+                    # Rename here
                     currNumber = numEle.get_attribute("value")
                     if itemNo == currNumber:
                         print("Downloading attachments for -" + itemNo)

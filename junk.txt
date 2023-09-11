@@ -19,3 +19,6 @@ except Exception as e:
     print("First page reached, Task Completed!!!")
 else:
     print(navPag, "Table body not found, please restart from here again")
+
+garnishemt url  https://cenveo.service-now.com/u_undefined_cenveo_garnishments_list.do?sysparm_userpref_module=1da9aaa0db2faf04b31dd0b2ca96197a
+
