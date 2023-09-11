@@ -51,7 +51,7 @@ homeHandle = driver.current_window_handle
 
 xpath = "/html/body/div[1]/div[1]/span/div/div[7]/div[1]/table/tbody/tr/td[3]/a"
 
-
+# Ignore git codespaces
 currentNav = "Last Page"
 
 while "Showing rows 1 to" not in currentNav:
