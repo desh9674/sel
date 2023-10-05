@@ -9,6 +9,9 @@ csvfilePath = "downloaded.csv"
 NoattaCsvPath = "Noattachmetns.csv"
 failedNavRange = "failedNavRange.csv"
 
+# Abhi#456
+# Pratik.Gole@cenveo.com
+
 ## Download Path, Change for each url downloads
 downloadsPath = r"C:\Users\cammy\Downloads\attachments\2022"
 
@@ -23,7 +26,7 @@ url = f"https://cenveo.service-now.com/u_undefined_cenveo_garnishments_list.do?s
 
 driver = webdriver.Chrome(options=options)
 
-## Login
+## Login, then enter Y once login is completed
 driver.get(baseUrl)
 loginOk = input("Enter Y if login is done - ")
 if loginOk == "Y":
@@ -39,22 +42,23 @@ numBtn = driver.find_element(
     "/html/body/div[1]/div[1]/span/div/div[7]/div[1]/table/thead/tr[1]/th[3]/span/a",
 )
 numBtn.click()
-time.sleep(4)
+time.sleep(3)
 # go to last page
 lastBtn = driver.find_element(
     By.XPATH,
     "/html/body/div[1]/div[1]/span/div/div[7]/div[2]/table/tbody/tr/td[2]/span[1]/button[4]",
 )
 lastBtn.click()
-time.sleep(4)
-homeHandle = driver.current_window_handle
+time.sleep(20)
 
+homeHandle = driver.current_window_handle
 xpath = "/html/body/div[1]/div[1]/span/div/div[7]/div[1]/table/tbody/tr/td[3]/a"
 
 # Ignore git codespaces
 currentNav = "Last Page"
 
 while "Showing rows 1 to" not in currentNav:
+    homeHandle = driver.current_window_handle
     table = driver.find_elements(By.XPATH, xpath)
     if table:
         for trow in table:
@@ -112,6 +116,8 @@ while "Showing rows 1 to" not in currentNav:
                             dl_wait += 1
                         try:
                             os.rename(downloadedFileName, newFileName)
+                            if dl_wait > 40:
+                                raise ()
                             with open(csvfilePath, "a+", newline="") as f:
                                 writer = csv.writer(f)
                                 writer.writerow([str(itemNo), str(downloadedFileName)])
